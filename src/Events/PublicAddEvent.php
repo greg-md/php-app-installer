@@ -2,21 +2,15 @@
 
 namespace Greg\AppInstaller\Events;
 
-use App\Application;
 use Greg\Support\Dir;
 
 class PublicAddEvent
 {
-    private $app;
-
-    public function __construct(Application $app)
+    public function handle(string $source, string $publicDestination = null)
     {
-        $this->app = $app;
-    }
+        $publicDestination = $publicDestination ? ltrim($publicDestination, '\/') : pathinfo($source, PATHINFO_FILENAME);
 
-    public function handle(string $source, string $baseUrl)
-    {
-        $destination = getcwd() . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . ltrim($baseUrl, '/');
+        $destination = getcwd() . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . $publicDestination;
 
         Dir::copy($source, $destination);
     }

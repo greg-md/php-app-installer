@@ -2,21 +2,13 @@
 
 namespace Greg\AppInstaller\Events;
 
-use App\Application;
 use Greg\Support\Dir;
 
 class PublicRemoveEvent
 {
-    private $app;
-
-    public function __construct(Application $app)
+    public function handle(string $publicDestination)
     {
-        $this->app = $app;
-    }
-
-    public function handle(string $baseUrl)
-    {
-        $path = getcwd() . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . $baseUrl;
+        $path = getcwd() . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . $publicDestination;
 
         Dir::unlink($path);
     }

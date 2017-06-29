@@ -10,6 +10,8 @@ use Greg\AppInstaller\Events\ConfigAddEvent;
 use Greg\AppInstaller\Events\ConfigRemoveEvent;
 use Greg\AppInstaller\Events\PublicAddEvent;
 use Greg\AppInstaller\Events\PublicRemoveEvent;
+use Greg\AppInstaller\Events\ResourceAddEvent;
+use Greg\AppInstaller\Events\ResourceRemoveEvent;
 use Greg\Framework\ServiceProvider;
 
 class AppServiceProvider implements ServiceProvider
@@ -26,6 +28,12 @@ class AppServiceProvider implements ServiceProvider
 
         $app->listen('app.public.add', PublicAddEvent::class);
         $app->listen('app.public.remove', PublicRemoveEvent::class);
+
+        $app->listen('app.resource.add', ResourceAddEvent::class);
+        $app->listen('app.resource.remove', ResourceRemoveEvent::class);
+
+        $app->listen('app.root.add', ResourceAddEvent::class);
+        $app->listen('app.root.remove', ResourceRemoveEvent::class);
     }
 
     public function bootConsoleKernel(ConsoleKernel $kernel)

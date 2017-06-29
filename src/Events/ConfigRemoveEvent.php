@@ -27,5 +27,7 @@ class ConfigRemoveEvent
         }
 
         Dir::unlink($source);
+
+        $this->app->removeConfig($name);
     }
 }
