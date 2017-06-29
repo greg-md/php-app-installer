@@ -1,0 +1,30 @@
+{
+  "name": "greg-md/php-app-installer",
+  "type": "library",
+  "description": "Components installer for Greg PHP Application.",
+  "keywords": [ "greg-md", "greg-php", "php-app-installer", "greg-app-installer", "app-installer", "php", "web-artisans" ],
+  "homepage": "https://github.com/greg-md/php-app-installer",
+  "license": "MIT",
+  "authors": [
+    { "name": "Grigorii Duca", "email": "contact@greg.md", "homepage": "http://greg.md/" }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": "^7.1"
+  },
+  "require-dev": {
+    "greg-md/php-app": "dev-master",
+    "phpunit/phpunit": "6.2.*",
+    "symfony/var-dumper": "^3.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Greg\\AppInstaller\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Greg\\AppInstaller\\": "tests/"
+    }
+  }
+}
