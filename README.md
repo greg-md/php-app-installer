@@ -1,6 +1,6 @@
 # PHP App Installer
 
-[![StyleCI](https://styleci.io/repos/95762863/shield?style=flat)](https://styleci.io/repos/95762863)
+[![StyleCI](https://styleci.io/repos/00000000/shield?style=flat)](https://styleci.io/repos/00000000)
 [![Build Status](https://travis-ci.org/greg-md/php-app-installer.svg)](https://travis-ci.org/greg-md/php-app-installer)
 [![Total Downloads](https://poser.pugx.org/greg-md/php-app-installer/d/total.svg)](https://packagist.org/packages/greg-md/php-app-installer)
 [![Latest Stable Version](https://poser.pugx.org/greg-md/php-app-installer/v/stable.svg)](https://packagist.org/packages/greg-md/php-app-installer)
