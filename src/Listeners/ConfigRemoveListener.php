@@ -1,11 +1,11 @@
 <?php
 
-namespace Greg\AppInstaller\Events;
+namespace Greg\AppInstaller\Listeners;
 
 use App\Application;
 use Greg\Support\Dir;
 
-class ConfigRemoveEvent
+class ConfigRemoveListener
 {
     private $app;
 
