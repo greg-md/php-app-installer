@@ -1,8 +1,8 @@
 <?php
 
-namespace Greg\AppInstaller\Events;
+namespace Greg\AppInstaller\Events\BuildDeploy;
 
-class ConfigRemoveEvent
+class RunRemoveEvent
 {
     private $name;
 

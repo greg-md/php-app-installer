@@ -1,10 +1,10 @@
 <?php
 
-namespace Greg\AppInstaller\Events;
+namespace Greg\AppInstaller\Listeners;
 
 use Greg\Support\Dir;
 
-class ResourceRemoveEvent
+class ResourceRemoveListener
 {
     public function handle(string $resourceDestination)
     {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Greg\AppInstaller\Events;
+namespace Greg\AppInstaller\Listeners;
 
 use Greg\Support\Dir;
 
-class RootRemoveEvent
+class RootRemoveListener
 {
     public function handle(string $rootDestination)
     {

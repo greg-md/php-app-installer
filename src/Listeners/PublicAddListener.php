@@ -1,10 +1,10 @@
 <?php
 
-namespace Greg\AppInstaller\Events;
+namespace Greg\AppInstaller\Listeners;
 
 use Greg\Support\Dir;
 
-class PublicAddEvent
+class PublicAddListener
 {
     public function handle(string $source, string $publicDestination = null)
     {

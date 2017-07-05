@@ -1,10 +1,10 @@
 <?php
 
-namespace Greg\AppInstaller\Events;
+namespace Greg\AppInstaller\Listeners;
 
 use Greg\Support\Dir;
 
-class PublicRemoveEvent
+class PublicRemoveListener
 {
     public function handle(string $publicDestination)
     {
