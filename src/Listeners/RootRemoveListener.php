@@ -2,14 +2,23 @@
 
 namespace Greg\AppInstaller\Listeners;
 
-use Greg\Support\Dir;
+use Greg\AppInstaller\Application;
+use Greg\AppInstaller\Events\RootRemoveEvent;
+use Greg\AppInstaller\Listener\DestinationListener;
 
-class RootRemoveListener
+class RootRemoveListener extends DestinationListener
 {
-    public function handle(string $rootDestination)
-    {
-        $path = getcwd() . DIRECTORY_SEPARATOR . $rootDestination;
+    private $app;
 
-        Dir::unlink($path);
+    protected $outOfPathExceptionMessage = 'You can not remove out of root path.';
+
+    public function __construct(Application $app)
+    {
+        $this->app = $app;
+    }
+
+    public function handle(RootRemoveEvent $event)
+    {
+        $this->handleEvent($this->app->getRootPath(), $event);
     }
 }

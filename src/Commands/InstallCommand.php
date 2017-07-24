@@ -2,7 +2,7 @@
 
 namespace Greg\AppInstaller\Commands;
 
-use App\Application;
+use Greg\AppInstaller\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -31,7 +31,9 @@ class InstallCommand extends Command
     {
         $name = $input->getArgument('name');
 
-        $serviceProvider = $this->app->getServiceProvider($name);
+        if (!$serviceProvider = $this->app->getServiceProvider($name)) {
+            throw new \Exception('Service provider `' . $name . '` does not exists.');
+        }
 
         if (method_exists($serviceProvider, 'install')) {
             $this->app->callServiceProvider($serviceProvider, 'install', $input, $output);

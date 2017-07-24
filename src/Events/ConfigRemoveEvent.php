@@ -2,17 +2,12 @@
 
 namespace Greg\AppInstaller\Events;
 
-class ConfigRemoveEvent
-{
-    private $name;
+use Greg\AppInstaller\Event\NameEvent;
 
+class ConfigRemoveEvent extends NameEvent
+{
     public function __construct(string $name)
     {
-        $this->name = $name;
-    }
-
-    public function name(): string
-    {
-        return $this->name;
+        parent::__construct($name);
     }
 }

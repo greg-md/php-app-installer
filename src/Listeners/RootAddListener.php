@@ -2,16 +2,23 @@
 
 namespace Greg\AppInstaller\Listeners;
 
-use Greg\Support\Dir;
+use Greg\AppInstaller\Application;
+use Greg\AppInstaller\Events\RootAddEvent;
+use Greg\AppInstaller\Listener\SourceDestinationListener;
 
-class RootAddListener
+class RootAddListener extends SourceDestinationListener
 {
-    public function handle(string $source, string $rootDestination = null)
+    private $app;
+
+    protected $outOfPathExceptionMessage = 'You can not add out of root path.';
+
+    public function __construct(Application $app)
     {
-        $rootDestination = $rootDestination ? ltrim($rootDestination, '\/') : pathinfo($source, PATHINFO_FILENAME);
+        $this->app = $app;
+    }
 
-        $destination = getcwd() . DIRECTORY_SEPARATOR . $rootDestination;
-
-        Dir::copy($source, $destination);
+    public function handle(RootAddEvent $event)
+    {
+        $this->handleEvent($this->app->getRootPath(), $event);
     }
 }

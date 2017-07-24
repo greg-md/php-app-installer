@@ -2,7 +2,8 @@
 
 namespace Greg\AppInstaller\Listeners;
 
-use App\Application;
+use Greg\AppInstaller\Application;
+use Greg\AppInstaller\Events\ConfigAddEvent;
 use Greg\Support\Config;
 use Greg\Support\Dir;
 
@@ -15,24 +16,19 @@ class ConfigAddListener
         $this->app = $app;
     }
 
-    public function handle(string $source, string $name)
+    public function handle(ConfigAddEvent $event)
     {
-        $name = pathinfo($name, PATHINFO_FILENAME);
+        $configDestination = $this->app->getConfigPath()
+            . DIRECTORY_SEPARATOR . (is_file($event->source()) ? $event->name() . '.php' : $event->name());
 
-        $isFile = is_file($source);
+        Dir::copy($event->source(), $configDestination);
 
-        $destinationName = $isFile ? $name . '.php' : $name;
-
-        $configPath = getcwd() . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . $destinationName;
-
-        Dir::copy($source, $configPath);
-
-        if ($isFile) {
-            $config = require $configPath;
+        if (is_file($event->source())) {
+            $config = require $configDestination;
         } else {
-            $config = Config::dir($configPath);
+            $config = Config::dir($configDestination);
         }
 
-        $this->app->addConfig($name, $config);
+        $this->app->addConfig($event->name(), $config);
     }
 }

@@ -1,14 +1,14 @@
 <?php
 
-namespace Greg\AppInstaller\Events\BuildDeploy;
+namespace Greg\AppInstaller\Event;
 
-class RunRemoveEvent
+abstract class NameEvent
 {
     private $name;
 
     public function __construct(string $name)
     {
-        $this->name = $name;
+        $this->name = pathinfo($name, PATHINFO_BASENAME);
     }
 
     public function name(): string

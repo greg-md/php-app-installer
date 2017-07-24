@@ -2,16 +2,23 @@
 
 namespace Greg\AppInstaller\Listeners;
 
-use Greg\Support\Dir;
+use Greg\AppInstaller\Application;
+use Greg\AppInstaller\Events\PublicAddEvent;
+use Greg\AppInstaller\Listener\SourceDestinationListener;
 
-class PublicAddListener
+class PublicAddListener extends SourceDestinationListener
 {
-    public function handle(string $source, string $publicDestination = null)
+    private $app;
+
+    protected $outOfPathExceptionMessage = 'You can not add out of public path.';
+
+    public function __construct(Application $app)
     {
-        $publicDestination = $publicDestination ? ltrim($publicDestination, '\/') : pathinfo($source, PATHINFO_FILENAME);
+        $this->app = $app;
+    }
 
-        $destination = getcwd() . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . $publicDestination;
-
-        Dir::copy($source, $destination);
+    public function handle(PublicAddEvent $event)
+    {
+        $this->handleEvent($this->app->getPublicPath(), $event);
     }
 }

@@ -2,16 +2,23 @@
 
 namespace Greg\AppInstaller\Listeners;
 
-use Greg\Support\Dir;
+use Greg\AppInstaller\Application;
+use Greg\AppInstaller\Events\ResourceAddEvent;
+use Greg\AppInstaller\Listener\SourceDestinationListener;
 
-class ResourceAddListener
+class ResourceAddListener extends SourceDestinationListener
 {
-    public function handle(string $source, string $resourceDestination = null)
+    private $app;
+
+    protected $outOfPathExceptionMessage = 'You can not add out of resources path.';
+
+    public function __construct(Application $app)
     {
-        $resourceDestination = $resourceDestination ? ltrim($resourceDestination, '\/') : pathinfo($source, PATHINFO_FILENAME);
+        $this->app = $app;
+    }
 
-        $destination = getcwd() . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . $resourceDestination;
-
-        Dir::copy($source, $destination);
+    public function handle(ResourceAddEvent $event)
+    {
+        $this->handleEvent($this->app->getResourcesPath(), $event);
     }
 }

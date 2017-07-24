@@ -2,7 +2,7 @@
 
 namespace Greg\AppInstaller\Commands;
 
-use App\Application;
+use Greg\AppInstaller\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -31,12 +31,14 @@ class UninstallCommand extends Command
     {
         $name = $input->getArgument('name');
 
-        $serviceProvider = $this->app->getServiceProvider($name);
+        if (!$serviceProvider = $this->app->getServiceProvider($name)) {
+            throw new \Exception('Service provider `' . $name . '` does not exists.');
+        }
 
         if (method_exists($serviceProvider, 'uninstall')) {
             $this->app->callServiceProvider($serviceProvider, 'uninstall', $input, $output);
 
-            $message = 'Service provider <fg=yellow;options=bold>' . $name . '</> has been installed.';
+            $message = 'Service provider <fg=yellow;options=bold>' . $name . '</> has been uninstalled.';
         } else {
             $message = 'Nothing to uninstall for <fg=yellow;options=bold>' . $name . '</> service provider.';
         }

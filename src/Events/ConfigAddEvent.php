@@ -2,26 +2,18 @@
 
 namespace Greg\AppInstaller\Events;
 
-class ConfigAddEvent
-{
-    private $source;
+use Greg\AppInstaller\Event\SourceNameEvent;
 
-    private $name;
+class ConfigAddEvent extends SourceNameEvent
+{
+    protected $realPathExceptionMessage = 'Config source path is not a real path.';
 
     public function __construct(string $source, string $name = null)
     {
-        $this->source = $source;
+        if (!$name) {
+            $name = pathinfo($source, PATHINFO_FILENAME);
+        }
 
-        $this->name = $name;
-    }
-
-    public function source(): string
-    {
-        return $this->source;
-    }
-
-    public function name(): ?string
-    {
-        return $this->name;
+        parent::__construct($source, $name);
     }
 }

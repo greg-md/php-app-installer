@@ -2,7 +2,8 @@
 
 namespace Greg\AppInstaller\Listeners;
 
-use App\Application;
+use Greg\AppInstaller\Application;
+use Greg\AppInstaller\Events\ConfigRemoveEvent;
 use Greg\Support\Dir;
 
 class ConfigRemoveListener
@@ -14,9 +15,11 @@ class ConfigRemoveListener
         $this->app = $app;
     }
 
-    public function handle(string $name)
+    public function handle(ConfigRemoveEvent $event)
     {
-        $source = getcwd() . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . pathinfo($name, PATHINFO_FILENAME);
+        $this->app->removeConfig($event->name());
+
+        $source = $this->app->getConfigPath() . DIRECTORY_SEPARATOR . $event->name();
 
         if (!is_dir($source)) {
             $source .= '.php';
@@ -27,7 +30,5 @@ class ConfigRemoveListener
         }
 
         Dir::unlink($source);
-
-        $this->app->removeConfig($name);
     }
 }
