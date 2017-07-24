@@ -2,10 +2,30 @@
 
 namespace Greg\AppInstaller;
 
+use Greg\Support\Dir;
 use PHPUnit\Framework\TestCase;
 
 class ApplicationTest extends TestCase
 {
+    private $rootPath = __DIR__ . '/testing';
+
+    public function setUp()
+    {
+        Dir::make($this->rootPath);
+
+        Dir::make($this->rootPath . '/app');
+        Dir::make($this->rootPath . '/build-deploy');
+        Dir::make($this->rootPath . '/config');
+        Dir::make($this->rootPath . '/public');
+        Dir::make($this->rootPath . '/resources');
+        Dir::make($this->rootPath . '/storage');
+    }
+
+    public function tearDown()
+    {
+        Dir::unlink($this->rootPath);
+    }
+
     public function testCanInstantiate()
     {
         $app = new Application();
@@ -17,9 +37,9 @@ class ApplicationTest extends TestCase
     {
         $app = new Application();
 
-        $app->configure($rootPath = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'application');
+        $app->configure($this->rootPath);
 
-        $rootPath = realpath($rootPath);
+        $rootPath = realpath($this->rootPath);
 
         $this->assertEquals($rootPath, $app->getRootPath());
 
