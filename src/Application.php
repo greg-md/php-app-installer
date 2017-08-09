@@ -20,9 +20,9 @@ class Application extends \Greg\Framework\Application
 
     protected function boot()
     {
-        $this->addServiceProvider(new AppServiceProvider());
-
         $this->register($this);
+
+        $this->addServiceProvider(new AppServiceProvider());
 
         $this->bootApp();
     }
