@@ -9,8 +9,7 @@ class SourceDestinationEventTest extends TestCase
     public function testCanInstantiate()
     {
         /** @var SourceDestinationEvent $event */
-        $event = new class(__DIR__) extends SourceDestinationEvent
-        {
+        $event = new class(__DIR__) extends SourceDestinationEvent {
         };
 
         $this->assertInstanceOf(SourceDestinationEvent::class, $event);
@@ -20,16 +19,14 @@ class SourceDestinationEventTest extends TestCase
     {
         $this->expectException(\Exception::class);
 
-        new class(__DIR__ . '/undefined') extends SourceDestinationEvent
-        {
+        new class(__DIR__ . '/undefined') extends SourceDestinationEvent {
         };
     }
 
     public function testCanGetSource()
     {
         /** @var SourceDestinationEvent $event */
-        $event = new class(__DIR__) extends SourceDestinationEvent
-        {
+        $event = new class(__DIR__) extends SourceDestinationEvent {
         };
 
         $this->assertEquals(__DIR__, $event->source());
@@ -38,8 +35,7 @@ class SourceDestinationEventTest extends TestCase
     public function testCanGetRealSource()
     {
         /** @var SourceDestinationEvent $event */
-        $event = new class(__DIR__ . '/..') extends SourceDestinationEvent
-        {
+        $event = new class(__DIR__ . '/..') extends SourceDestinationEvent {
         };
 
         $this->assertEquals(realpath(__DIR__ . '/..'), $event->source());
@@ -48,8 +44,7 @@ class SourceDestinationEventTest extends TestCase
     public function testCanGetDestination()
     {
         /** @var SourceDestinationEvent $event */
-        $event = new class(__DIR__ . '/..', 'foo') extends SourceDestinationEvent
-        {
+        $event = new class(__DIR__ . '/..', 'foo') extends SourceDestinationEvent {
         };
 
         $this->assertEquals('foo', $event->destination());
@@ -58,8 +53,7 @@ class SourceDestinationEventTest extends TestCase
     public function testCanGetDestinationFromSource()
     {
         /** @var SourceDestinationEvent $event */
-        $event = new class(__DIR__) extends SourceDestinationEvent
-        {
+        $event = new class(__DIR__) extends SourceDestinationEvent {
         };
 
         $this->assertEquals(pathinfo(__DIR__, PATHINFO_BASENAME), $event->destination());
@@ -68,8 +62,7 @@ class SourceDestinationEventTest extends TestCase
     public function testCanGetDestinationWithoutSeparatorFirst()
     {
         /** @var SourceDestinationEvent $event */
-        $event = new class(__DIR__, '/foo/bar') extends SourceDestinationEvent
-        {
+        $event = new class(__DIR__, '/foo/bar') extends SourceDestinationEvent {
         };
 
         $this->assertEquals('foo/bar', $event->destination());

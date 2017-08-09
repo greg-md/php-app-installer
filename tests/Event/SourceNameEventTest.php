@@ -9,8 +9,7 @@ class SourceNameEventTest extends TestCase
     public function testCanInstantiate()
     {
         /** @var SourceNameEvent $event */
-        $event = new class(__DIR__) extends SourceNameEvent
-        {
+        $event = new class(__DIR__) extends SourceNameEvent {
         };
 
         $this->assertInstanceOf(SourceNameEvent::class, $event);
@@ -20,16 +19,14 @@ class SourceNameEventTest extends TestCase
     {
         $this->expectException(\Exception::class);
 
-        new class(__DIR__ . '/undefined') extends SourceNameEvent
-        {
+        new class(__DIR__ . '/undefined') extends SourceNameEvent {
         };
     }
 
     public function testCanGetSource()
     {
         /** @var SourceNameEvent $event */
-        $event = new class(__DIR__) extends SourceNameEvent
-        {
+        $event = new class(__DIR__) extends SourceNameEvent {
         };
 
         $this->assertEquals(__DIR__, $event->source());
@@ -38,8 +35,7 @@ class SourceNameEventTest extends TestCase
     public function testCanGetRealSource()
     {
         /** @var SourceNameEvent $event */
-        $event = new class(__DIR__ . '/..') extends SourceNameEvent
-        {
+        $event = new class(__DIR__ . '/..') extends SourceNameEvent {
         };
 
         $this->assertEquals(realpath(__DIR__ . '/..'), $event->source());
@@ -48,8 +44,7 @@ class SourceNameEventTest extends TestCase
     public function testCanGetName()
     {
         /** @var SourceNameEvent $event */
-        $event = new class(__DIR__, 'foo') extends SourceNameEvent
-        {
+        $event = new class(__DIR__, 'foo') extends SourceNameEvent {
         };
 
         $this->assertEquals('foo', $event->name());
@@ -58,8 +53,7 @@ class SourceNameEventTest extends TestCase
     public function testCanGetNameFromSource()
     {
         /** @var SourceNameEvent $event */
-        $event = new class(__DIR__) extends SourceNameEvent
-        {
+        $event = new class(__DIR__) extends SourceNameEvent {
         };
 
         $this->assertEquals(pathinfo(__DIR__, PATHINFO_BASENAME), $event->name());
@@ -68,8 +62,7 @@ class SourceNameEventTest extends TestCase
     public function testCanGetNameFromAPath()
     {
         /** @var SourceNameEvent $event */
-        $event = new class(__DIR__, '/foo/bar') extends SourceNameEvent
-        {
+        $event = new class(__DIR__, '/foo/bar') extends SourceNameEvent {
         };
 
         $this->assertEquals('bar', $event->name());

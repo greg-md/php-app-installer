@@ -22,8 +22,7 @@ class DestinationListenerTest extends TestCase
 
     public function testCanInstantiate()
     {
-        $listener = new class extends DestinationListener
-        {
+        $listener = new class() extends DestinationListener {
         };
 
         $this->assertInstanceOf(DestinationListener::class, $listener);
@@ -34,11 +33,11 @@ class DestinationListenerTest extends TestCase
         $this->expectException(\Exception::class);
 
         /** @var DestinationListener $listener */
-        $listener = new class extends DestinationListener
-        {
+        $listener = new class() extends DestinationListener {
         };
 
-        $listener->handleEvent($this->destinationPath, new class('foo/../..') extends DestinationEvent {});
+        $listener->handleEvent($this->destinationPath, new class('foo/../..') extends DestinationEvent {
+        });
     }
 
     public function testCanHandleEvent()
@@ -50,11 +49,11 @@ class DestinationListenerTest extends TestCase
         $this->assertFileExists($file);
 
         /** @var DestinationListener $listener */
-        $listener = new class extends DestinationListener
-        {
+        $listener = new class() extends DestinationListener {
         };
 
-        $listener->handleEvent($this->destinationPath, new class($name) extends DestinationEvent {});
+        $listener->handleEvent($this->destinationPath, new class($name) extends DestinationEvent {
+        });
 
         $this->assertFileNotExists($file);
     }
