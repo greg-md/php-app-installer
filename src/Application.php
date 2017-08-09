@@ -22,6 +22,10 @@ class Application extends \Greg\Framework\Application
     {
         $this->register($this);
 
+        if (get_class($this) !== Application::class) {
+            $this->inject(Application::class, $this);
+        }
+
         $this->addServiceProvider(new AppServiceProvider());
 
         $this->bootApp();
