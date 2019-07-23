@@ -49,25 +49,25 @@ class AppServiceProviderTest extends TestCase
         $this->assertInstanceOf(AppServiceProvider::class, $app->getServiceProvider('app'));
 
         $this->assertEquals([
-            RootAddEvent::class => [RootAddListener::class],
+            RootAddEvent::class    => [RootAddListener::class],
             RootRemoveEvent::class => [RootRemoveListener::class],
 
-            AppAddEvent::class => [AppAddListener::class],
+            AppAddEvent::class    => [AppAddListener::class],
             AppRemoveEvent::class => [AppRemoveListener::class],
 
-            BuildDeployRunAddEvent::class => [BuildDeployRunAddListener::class],
+            BuildDeployRunAddEvent::class    => [BuildDeployRunAddListener::class],
             BuildDeployRunRemoveEvent::class => [BuildDeployRunRemoveListener::class],
 
-            ConfigAddEvent::class => [ConfigAddListener::class],
+            ConfigAddEvent::class    => [ConfigAddListener::class],
             ConfigRemoveEvent::class => [ConfigRemoveListener::class],
 
-            PublicAddEvent::class => [PublicAddListener::class],
+            PublicAddEvent::class    => [PublicAddListener::class],
             PublicRemoveEvent::class => [PublicRemoveListener::class],
 
-            ResourceAddEvent::class => [ResourceAddListener::class],
+            ResourceAddEvent::class    => [ResourceAddListener::class],
             ResourceRemoveEvent::class => [ResourceRemoveListener::class],
 
-            StorageAddEvent::class => [StorageAddListener::class],
+            StorageAddEvent::class    => [StorageAddListener::class],
             StorageRemoveEvent::class => [StorageRemoveListener::class],
         ], $app->events());
     }
