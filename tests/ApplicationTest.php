@@ -9,7 +9,7 @@ class ApplicationTest extends TestCase
 {
     private $rootPath = __DIR__ . '/testing';
 
-    public function setUp()
+    protected function setUp(): void
     {
         Dir::make($this->rootPath);
 
@@ -21,7 +21,7 @@ class ApplicationTest extends TestCase
         Dir::make($this->rootPath . '/storage');
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         Dir::unlink($this->rootPath);
     }

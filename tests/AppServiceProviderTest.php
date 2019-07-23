@@ -48,26 +48,28 @@ class AppServiceProviderTest extends TestCase
 
         $this->assertInstanceOf(AppServiceProvider::class, $app->getServiceProvider('app'));
 
-        $this->assertArraySubset([RootAddEvent::class => [RootAddListener::class]], $app->events());
-        $this->assertArraySubset([RootRemoveEvent::class => [RootRemoveListener::class]], $app->events());
+        $this->assertEquals([
+            RootAddEvent::class => [RootAddListener::class],
+            RootRemoveEvent::class => [RootRemoveListener::class],
 
-        $this->assertArraySubset([AppAddEvent::class => [AppAddListener::class]], $app->events());
-        $this->assertArraySubset([AppRemoveEvent::class => [AppRemoveListener::class]], $app->events());
+            AppAddEvent::class => [AppAddListener::class],
+            AppRemoveEvent::class => [AppRemoveListener::class],
 
-        $this->assertArraySubset([BuildDeployRunAddEvent::class => [BuildDeployRunAddListener::class]], $app->events());
-        $this->assertArraySubset([BuildDeployRunRemoveEvent::class => [BuildDeployRunRemoveListener::class]], $app->events());
+            BuildDeployRunAddEvent::class => [BuildDeployRunAddListener::class],
+            BuildDeployRunRemoveEvent::class => [BuildDeployRunRemoveListener::class],
 
-        $this->assertArraySubset([ConfigAddEvent::class => [ConfigAddListener::class]], $app->events());
-        $this->assertArraySubset([ConfigRemoveEvent::class => [ConfigRemoveListener::class]], $app->events());
+            ConfigAddEvent::class => [ConfigAddListener::class],
+            ConfigRemoveEvent::class => [ConfigRemoveListener::class],
 
-        $this->assertArraySubset([PublicAddEvent::class => [PublicAddListener::class]], $app->events());
-        $this->assertArraySubset([PublicRemoveEvent::class => [PublicRemoveListener::class]], $app->events());
+            PublicAddEvent::class => [PublicAddListener::class],
+            PublicRemoveEvent::class => [PublicRemoveListener::class],
 
-        $this->assertArraySubset([ResourceAddEvent::class => [ResourceAddListener::class]], $app->events());
-        $this->assertArraySubset([ResourceRemoveEvent::class => [ResourceRemoveListener::class]], $app->events());
+            ResourceAddEvent::class => [ResourceAddListener::class],
+            ResourceRemoveEvent::class => [ResourceRemoveListener::class],
 
-        $this->assertArraySubset([StorageAddEvent::class => [StorageAddListener::class]], $app->events());
-        $this->assertArraySubset([StorageRemoveEvent::class => [StorageRemoveListener::class]], $app->events());
+            StorageAddEvent::class => [StorageAddListener::class],
+            StorageRemoveEvent::class => [StorageRemoveListener::class],
+        ], $app->events());
     }
 
     public function testCanBootConsoleKernel()

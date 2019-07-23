@@ -11,14 +11,14 @@ class SourceDestinationListenerTestCase extends TestCase
 
     protected $destinationPath = __DIR__ . '/destination';
 
-    protected function setUp()
+    protected function setUp(): void
     {
         Dir::make($this->sourcePath);
 
         Dir::make($this->destinationPath);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         Dir::unlink($this->sourcePath);
 
