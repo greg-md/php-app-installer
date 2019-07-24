@@ -24,7 +24,7 @@ class UninstallCommand extends Command
         $this
             ->setName('uninstall')
             ->addArgument('name', InputArgument::REQUIRED, 'The name of the service provider.')
-            ->setDescription('Uninstall service provider.');
+            ->setDescription('Uninstall Service Provider.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
